@@ -1,21 +1,20 @@
 import mongoose from 'mongoose';
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
-const Page = new Schema({
-    name:{
+const PageSchema = new Schema({
+    name: {
         type: String,
         required: true,
         trim: true,
         maxLength: 25,
     },
-    slug:{
+    slug: {
         type: String,
-        required: true
+        required: true,
     },
     content: Object,
-},
-{
-    timestamp: true
+}, {
+    timestamps: true  // Corrected option name
 });
 
-export default mongoose.model('Pages', Page);
+export default mongoose.model('Page', PageSchema);

@@ -6,5 +6,5 @@ export const home = async(req,res)=>{
 export const editor = async(req,res)=>{
     const pages = await listPages();
     const selectedPage = pages.find(page=> page.id === req.params.pageId)
-    res.render('home',{title: 'Drag and Drop',pages,selectedPage});
+    res.render('editor',{title: 'Drag and Drop',pages,selectedPage});
 }

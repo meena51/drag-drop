@@ -1,17 +1,13 @@
 import express from 'express'
+import {editor, home} from './ui.controller.js'
 const uiRoute = express.Router();
 
-uiRoute.get('/',(req,res)=>{
-    res.render('home',{title: "Drag and Drop"});
-});
+uiRoute.get('/',home);
 
-uiRoute.get('/editor',(req,res)=>{
-    res.render('editor',{title: "Drag and Drop"});
-});
-
+uiRoute.get('/editor/:pageId',editor);
 
 uiRoute.all("*",(req,res)=>{
     res.render('404');
 });
 
-export default uiRoute
+export default uiRoute;
