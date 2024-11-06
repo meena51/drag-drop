@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import uiRoute from './ui/ui.route.js';
 // Define __dirname for ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,9 +18,7 @@ app.use("/resources", express.static(path.join(__dirname, 'public')));
 app.use("/views", express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'hbs');
 
-app.get("/", (req, res) => {
-    res.render("home", { title: "Drag and Drop" });
-});
+app.use("/", uiRoute)
 
 const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {
