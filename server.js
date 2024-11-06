@@ -1,21 +1,28 @@
 import express from 'express';
 import mongoose from "mongoose";
 import cors from 'cors';
-import path from 'path'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-//setup express App
+// Define __dirname for ES module compatibility
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Set up express app
 const app = express();
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 
-//Setup Template Engine
-app.use("/resources",express.static(path.join(__dirname,'public')));
-app.use("views",express.static(path.join(__dirname,'views')));
-app.get("/",(req,res)=>{
-    console.log("Home Route");
-    res.json({msg:"Welcome"})
+// Setup static file serving and views
+app.use("/resources", express.static(path.join(__dirname, 'public')));
+app.use("/views", express.static(path.join(__dirname, 'views')));
+app.set('view engine', 'hbs');
+
+app.get("/", (req, res) => {
+    res.render("home", { title: "Drag and Drop" });
 });
 
 const PORT = process.env.PORT || 8085;
-app.listen(PORT ,()=>{
-    console.log(`Server is running on port ${PORT}`)
-})
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
