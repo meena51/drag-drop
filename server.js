@@ -7,6 +7,9 @@ import path from 'path'
 const app = express();
 app.use(express.json())
 
+//Setup Template Engine
+app.use("/resources",express.static(path.join(__dirname,'public')));
+app.use("views",express.static(path.join(__dirname,'views')));
 app.get("/",(req,res)=>{
     console.log("Home Route");
     res.json({msg:"Welcome"})
